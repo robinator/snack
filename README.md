@@ -5,7 +5,7 @@
       |___/_| |_|\__,_|\___|_|\_\
       
 =============================================
-- Snack is a small framework for building static websites.
+ - Snack is a small framework for building static websites.
  - Snack is built on [tilt](http://github.com/rtomayko/tilt) and should render any template tilt can.
  - It compiles these templates into static html, css, and javascript.
  - It also comes with a rack-based server for development.
