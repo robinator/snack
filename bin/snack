@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+require File.dirname(__FILE__) + '/../lib/snack'
+
+command = ARGV[0] || 'serve'
+directory = ARGV[1] || '.'
+
+if %w[build serve example].include?(command)
+  puts "Site root is: #{directory}"
+  @app = Snack::Application.new(:root => directory)
+  @app.send(command)
+else
+  puts "#{command} is not a valid snack command"
+  puts "Usage: snack <build|serve|example> <directory>"
+end
