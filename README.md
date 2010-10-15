@@ -1,15 +1,13 @@
-	                      _    
-	 ___ _ __   __ _  ___| | __
-	/ __| '_ \ / _` |/ __| |/ /
-	\__ \ | | | (_| | (__|   < 
-	|___/_| |_|\__,_|\___|_|\_\
+													_ 
+		 ___ _ __   __ _  ___| | __
+		/ __| '_ \ / _` |/ __| |/ /
+		\__ \ | | | (_| | (__|   < 
+		|___/_| |_|\__,_|\___|_|\_\
+		
+	# Snack is a small framework for building static websites.
+	# It can compile these templates into static html, css, and javascript.
+	# It also comes with a rack-based server for development.
 	
-
-	#   Snack is a small framework for building static websites.
-	#   It can compile these templates into static html, css, and javascript.
-	#   It also comes with a rack-based server for development.
-
-
 Todo
 =============================================
 *For 0.1*
@@ -32,9 +30,9 @@ Todo
 
 Inspiration
 =============
-http://github.com/rtomayko/tilt
-http://github.com/staticmatic/staticmatic
-http://github.com/blahed/frank
-http://github.com/josh/stagecoach
-http://github.com/tdreyno/middleman
-http://github.com/mdub/pith
+ - http://github.com/rtomayko/tilt
+ - http://github.com/staticmatic/staticmatic
+ - http://github.com/blahed/frank
+ - http://github.com/josh/stagecoach
+ - http://github.com/tdreyno/middleman
+ - http://github.com/mdub/pith
