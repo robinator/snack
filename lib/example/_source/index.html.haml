@@ -1,0 +1,20 @@
+- @layout = 'views/_layouts/application'
+
+-content_for :head do
+	%link{:rel=>'stylesheet', :href=>'public/stylesheets/application.css'}
+	%script{:type=>'text/javascript', :src=>'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'}
+	%script{:type=>'text/javascript', :src=>'public/javascripts/application.js'}
+
+%h1 Snack
+
+%ul
+	%li
+		Snack is a small framework for building static websites.
+	%li
+		Snack is built on 
+		%a{:href => 'http://github.com/rtomayko/tilt'} tilt
+		and should render any template tilt can.
+	%li
+		It compiles these templates into static html, css, and javascript.
+	%li
+		It also comes with a rack-based server for development.

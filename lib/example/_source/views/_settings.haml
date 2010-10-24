@@ -1,0 +1,7 @@
+#settings
+	%h3 Settings
+	%ul
+	- @app.settings.marshal_dump.each do |name, value|
+		%li
+			%span.bold= "#{name}: "
+			= value

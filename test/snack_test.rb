@@ -1,9 +1,8 @@
 require 'rubygems'
 require 'minitest/spec'
 require 'rack/test'
-require 'rack/mock'
+require File.expand_path('../../lib/snack', __FILE__)
 
-require "#{File.dirname(__FILE__)}/../lib/snack"
 
 MiniTest::Unit.autorun
 
@@ -24,11 +23,16 @@ describe Snack::Server do
     last_response.body.must_equal "body {\n\tbackground: blue;\n}"
   end
 
-  it "should serve file compiled through tilt if request path exists with different extension" do
-    get('/sass_style.css')
+  it "should serve sass files compiled through tilt if request path exists with sass extension" do
+    get('/public/sass_style.css')
     last_response.body.must_equal "body {\n  background: blue; }\n"
   end
-  
+
+  it "should serve coffeescript files compiled through tilt if request path exists with coffee extension" do
+    get('/public/application.js')
+    last_response.body.must_equal "(function() {\n  $(document).ready(function() {\n    return alert('hello from snack');\n  });\n})();\n"
+  end
+
   it "should default to index.html if directory is requested" do
     response = get('/index.html')
     response = get('/')
@@ -39,62 +43,41 @@ describe Snack::Server do
 
   # partials
   it "should render partials if found" do
-    get('/partial_test/normal.html')
+    get('/pages/partial-normal.html')
     last_response.body.must_equal "This is a partial!\n"
   end
 
   it "should error if partial not found" do
-    get('/partial_test/failing.html')
+    get('/pages/partial-failing.html')
     last_response.status.must_equal 500
   end
-  
+
   # layouts
   it "should render a page within a layout if layout exists" do
-    get('/layout_test/page.html')
-    last_response.body.must_equal "<div id='content'>\n  <h1>Page Content</h1>\n</div>\n"
-  end
-
-  it "should render a page within a layout if layout exists" do
-    get('/layout_test/page.html')
+    get('/pages/layout-normal.html')
     last_response.body.must_equal "<div id='content'>\n  <h1>Page Content</h1>\n</div>\n"
   end
 
   it "should render a page within a specific layout if given valid path to that layout" do
-    get('/layout_test/page_with_alternate_layout.html')
+    get('/pages/layout-alternate.html')
     last_response.body.must_equal "<div id='alternate_content'>\n  <h1>Alternate Page Content</h1>\n</div>\n"
   end
 
-  # throw error when layout not found? (log it?)
-  
-  # yield
-  
-  # content_for
-  
-  # Engine specific tests
-  
-  # Sass
-  
-  # Haml
-  
-  # Coffeescript
-  
-  # Erb
-  
-  
+  it "should error if user set layout and layout not found" do
+    get('/pages/layout-failing.html')
+    last_response.status.must_equal 500
+  end
 
+  # variables
+  it "should pass variables defined in the page to the layout" do
+    get('/pages/variable-normal.html')
+    last_response.body.must_equal "happy\nsad\nmad\n"
+  end
 
-
-  # yield
-  # yield :name (content_for)
-  # set layout in view
-  # set vars in view
-  # index default
-  
-  # sass
-  # haml
-  # coffeescript
-  
-  
-
+  # yield / content_for
+  it "should yield named block content if defined using content_for" do
+    get('/pages/yield-normal.html')
+    last_response.body.must_equal "<div id='footer'>\n  <p>\n    Built with -: Snack :-\n  </p>\n</div>\n"
+  end
 
 end

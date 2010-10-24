@@ -1,11 +1,12 @@
 #!/usr/bin/env ruby
-require File.dirname(__FILE__) + '/../lib/snack'
+require File.expand_path('../../lib/snack', __FILE__)
+require 'ruby-debug'
 
 command = ARGV[0] || 'serve'
-directory = ARGV[1] || '.'
+directory = ARGV[1] || '_source'
 
 if %w[build serve example].include?(command)
-  puts "Site root is: #{directory}"
+  puts "-: Snack :- App root is: '#{directory}'"
   @app = Snack::Application.new(:root => directory)
   @app.send(command)
 else

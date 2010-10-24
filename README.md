@@ -4,7 +4,7 @@
       \__ \ | | | (_| | (__|   <
       |___/_| |_|\__,_|\___|_|\_\
       
-      
+
  - Snack is a small framework for building static websites.
  - Snack is built on [tilt](http://github.com/rtomayko/tilt) and should render any template tilt can.
  - It compiles these templates into static html, css, and javascript.
@@ -15,18 +15,11 @@ Todo
 *For 0.1*
 
 - documentation
-- test suite
-  - only haml, sass, coffee, erb
-- add Snack::Builder to export to static site
-- gem stuff
-- git repo
-- warning: multiple values for a block parameter (0 for 1) for yield_content
+- fixup example
 
 *For Later*
 
 - better error messages for parse template errors (sass)
-  - layout not found, etc
-- tests for other templates
  < From Rack::Server for server stuff? - see camping http://github.com/hank/camping/blob/master/lib/camping/server.rb
 - replace haml view stuff with haml::more gem?_
 
