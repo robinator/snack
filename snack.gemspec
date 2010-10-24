@@ -6,12 +6,13 @@ Gem::Specification.new do |s|
   s.description = 'Snack is a small framework for building static websites.'
 
   s.required_ruby_version     = '>= 1.8.7'
-  s.required_rubygems_version = ">= 1.3.6"
+  s.required_rubygems_version = '>= 1.3.6'
 
   s.author   = 'Rob Law'
   s.email    = 'rob@varietyour.com'
   s.homepage = 'http://github.com/robinator/snack/'
 
+  s.files              = Dir['{bin,lib,test}/**/*']
   s.executables        = %w[ snack ]
   s.default_executable = 'snack'
 

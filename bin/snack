@@ -6,10 +6,11 @@ command = ARGV[0] || 'serve'
 directory = ARGV[1] || '_source'
 
 if %w[build serve example].include?(command)
+  abort "-: Snack :- Unable to locate: '#{directory}'" unless File.exists?(directory)
   puts "-: Snack :- App root is: '#{directory}'"
   @app = Snack::Application.new(:root => directory)
   @app.send(command)
 else
-  puts "#{command} is not a valid snack command"
-  puts "Usage: snack <build|serve|example> <directory>"
+  puts "'#{command}' is not a valid snack command"
+  puts "Usage: snack {build,serve,example} <directory>"
 end
