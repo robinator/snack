@@ -22,7 +22,7 @@ Getting Started
 
    where "myapp" is the application name.
 
-3. Change directory to +myapp+ and start the web server:
+3. Start the web server:
 
         snack serve myapp
 
