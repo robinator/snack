@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.default_executable = 'snack'
 
   s.add_development_dependency 'rack'
-  s.add_development_dependency 'ostruct'  
+  s.add_development_dependency 'ostruct'
   s.add_development_dependency 'tilt'
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'haml', '>= 2.2.11'

@@ -3,7 +3,6 @@ require 'minitest/spec'
 require 'rack/test'
 require File.expand_path('../../lib/snack', __FILE__)
 
-
 MiniTest::Unit.autorun
 
 describe Snack::Server do
@@ -34,11 +33,11 @@ describe Snack::Server do
   end
 
   it "should default to index.html if directory is requested" do
-    response = get('/index.html')
+    direct = get('/index.html')
     response = get('/')
 
-    last_response.status.must_equal response.status
-    last_response.body.must_equal response.body
+    last_response.status.must_equal direct.status
+    last_response.body.must_equal direct.body
   end
 
   # partials

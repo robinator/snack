@@ -1,11 +1,6 @@
-require 'rubygems'
-require 'ostruct'
-require 'rack'
-require 'tilt'
-require 'coffee-script'
+%w[ rubygems ostruct rack tilt ].each{ |s| require s }
 
 module Snack
-
   class Application
     attr_accessor :settings, :builder
 
@@ -19,33 +14,35 @@ module Snack
         use Rack::CommonLogger
         use Rack::ShowStatus      # Nice looking 404s and other messages
         use Rack::ShowExceptions  # Nice looking errors
-
-        run Rack::Cascade.new([
-          Rack::File.new(app.root),
-          Snack::Server.new(app)
-        ])
+        run Snack::Server.new app
       end
     end
 
     def method_missing(sym)
-      self.settings.send(sym)
+      settings.send sym
     end
 
     def serve
       Rack::Handler::Thin.run @builder, :Port => 9393
     end
 
+    def new
+      FileUtils.mkdir root unless File.exists? root
+      FileUtils.cd root do
+        File.open('index.html.haml', 'w') {|f| f.puts 'Hello from snack!'}
+      end
+    end
+
     def build
-      puts "-: Snack :- Building: '#{File.join(self.root, self.output_dir)}'"
-      FileUtils.cd(self.root) do
+      FileUtils.cd root do
         # collect all files that don't start with '_'
         files = Dir[File.join('**', '*')].reject{ |f| f.include?('/_') || f.start_with?('_') }
 
         # setup output directory
-        FileUtils.mkdir(self.output_dir) unless File.exists?(self.output_dir)
+        FileUtils.mkdir output_dir unless File.exists? output_dir
 
         files.each do |file|
-          new_path = File.join(self.output_dir, file)
+          new_path = File.join(output_dir, file)
 
           if File.directory?(file)
             FileUtils.mkdir(new_path) unless File.exists?(new_path)
@@ -56,8 +53,6 @@ module Snack
           else
             FileUtils.cp(file, new_path)
           end
-          
-          puts "-: Snack :- Added: '#{new_path}'"
         end
         
       end
@@ -72,23 +67,23 @@ module Snack
     end
 
     def call(env)
-      @env = env
-      body = render
+      body = render env
       if body
         @response = Rack::Response.new
-        @response['Content-Type'] = Rack::Mime.mime_type(File.extname(@env["PATH_INFO"]), 'text/html')
-        @response.write(body)
+        @response['Content-Type'] = Rack::Mime.mime_type(File.extname(env["PATH_INFO"]), 'text/html')
+        @response.write body
         @response.finish
       else
-        [404, {"Content-Type" => "text/plain", "X-Cascade" => "pass"}, ["Not Found"]]
+        [404, {"Content-Type" => "text/plain"}, "Not Found"]
       end
     end
 
-    def render
-      template_path = File.join(@app.root, @env["PATH_INFO"])
-      
+    def render(env)
+      template_path = File.join(@app.root, env["PATH_INFO"])
+
       # default to index if path to directory
-      template_path = File.join(template_path, 'index') if File.directory?(template_path)
+      template_path = File.join(template_path, 'index') if File.directory? template_path
+      return File.read template_path if File.exists? template_path
 
       # return the first filename that matches file
       template = Dir[File.join(template_path + '*')].first
@@ -98,12 +93,9 @@ module Snack
   end
 
   # Ideally we can take any file and an app and create a view from it
-  # render will return a string, so to write to a file we just 'render' inside file
-  # to serve it we just render at server level
+  # render will return a string
   class View
-    #include Tilt::CompileSite
-    attr_accessor :app, :template
-    attr_accessor :layout, :content_for
+    attr_accessor :app, :template, :layout, :content_for
 
     def initialize(app, template)
       @app = app
@@ -133,11 +125,9 @@ module Snack
     def content_for(name, &block)
       @content_for[name] = []
       @content_for[name] << capture_haml(&block) if block_is_haml?(block)
-      @content_for[name] unless block_given?
     end
 
-    # return a view body from a full path to the resource
-    # return nil if adequate template cannot be found
+    # return a view body or nil if adequate template cannot be found
     def render
       template_body = Tilt.new(@template).render(self)
 
