@@ -5,7 +5,7 @@
 %h1 snack
 
 %ul
-	%li Snack is a small (<= 150 lines) framework for building static websites.
+	%li Snack is a small (less than 150 lines) framework for building static websites.
 	%li It compiles haml, sass, and coffee-script templates into html, css, and javascript.
 	%li It also comes with a rack-based server for development.
 		
@@ -33,26 +33,22 @@
 		%pre snack build myapp
 		You should see a new directory, _output, with your site in it.
 
-%h2 
-	Views
-	%h3 Layouts
-	%p By default, snack does not render templates within layouts. If you would like your templates to render within a layout, just assign the layout's path to @layout. The path should be relative to the snack root. For example, in index.html.haml:
-	%pre 
-		@layout = 'path/to/layouts/application'
+%h2 Views
 
-	%h3
-		Partials
-	%h3
-		Capture
-	%p The capture helper allows you to extract part of a template into a variable. You can then use this variable anywhere in your templates or layout. For example, in index.html.haml:
-	%pre
-		:plain
-			- @header = capture do
-			%link{:rel=>'stylesheet', :href=>'style.css'}
-	And then in your layout:
-	%pre
-		\%body
-		\= @header
-	
+%h3 Layouts
+%p By default, snack does not render templates within layouts. If you would like your templates to render within a layout, just assign the layout's path to @layout. The path should be relative to the snack root. For example, in index.html.haml:
+%pre @layout = 'path/to/layouts/application'
 
-	
+%h3 Partials
+
+%h3 Capture
+%p The capture helper allows you to extract part of a template into a variable. You can then use this variable anywhere in your templates or layout. For example, in index.html.haml:
+%pre
+	:plain
+		- @header = capture do
+		%link{:rel=>'stylesheet', :href=>'style.css'}
+And then in your layout:
+%pre
+	\%body
+	\= @header
+
