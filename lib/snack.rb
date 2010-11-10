@@ -6,7 +6,6 @@ module Snack
 
     def initialize(options = {})
       @settings = OpenStruct.new(options)
-      @settings.layout   ||= '_layouts/application'
       @settings.output_dir ||= '../_output'
 
       app = self
@@ -29,7 +28,7 @@ module Snack
     def new
       FileUtils.mkdir root unless File.exists? root
       FileUtils.cd root do
-        File.open('index.html.haml', 'w') {|f| f.puts 'Hello from snack!'}
+        File.open('index.html.haml', 'w') { |f| f.puts 'Hello from snack!' }
       end
     end
 
@@ -94,12 +93,11 @@ module Snack
   # Ideally we can take any file and an app and create a view from it
   # render will return a string
   class View
-    attr_accessor :app, :template, :layout
+    attr_accessor :app, :template
 
     def initialize(app, template)
       @app = app
       @template = template
-      @layout = @app.layout
     end
 
     # return the path to a valid layout file
@@ -129,7 +127,7 @@ module Snack
       template_body = Tilt.new(@template).render(self)
       if layout
         @body = Tilt.new(layout).render(self) { template_body }
-      elsif @layout && @layout != @app.layout # user changed; alert them to fails
+      elsif @layout # user changed; alert them to fails
         raise "-: Snack :- Unable to locate layout at: '#{@layout}'"
       end
       @body || template_body

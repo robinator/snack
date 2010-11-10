@@ -57,11 +57,6 @@ describe Snack::Server do
     last_response.body.must_equal "<div id='content'>\n  <h1>Page Content</h1>\n</div>\n"
   end
 
-  it "should render a page within a specific layout if given valid path to that layout" do
-    get('/pages/layout-alternate.html')
-    last_response.body.must_equal "<div id='alternate_content'>\n  <h1>Alternate Page Content</h1>\n</div>\n"
-  end
-
   it "should error if user set layout and layout not found" do
     get('/pages/layout-failing.html')
     last_response.status.must_equal 500
