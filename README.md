@@ -36,6 +36,13 @@ Getting Started
 
    You should see a new directory, _output, with your site in it.
 
+Views
+================
+## Layouts
+## Partials
+## Capture
+
+
 
 Todo
 ================

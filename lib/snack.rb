@@ -67,7 +67,7 @@ module Snack
     end
 
     def call(env)
-      body = render env
+      body = render File.join(@app.root, env["PATH_INFO"])
       if body
         @response = Rack::Response.new
         @response['Content-Type'] = Rack::Mime.mime_type(File.extname(env["PATH_INFO"]), 'text/html')
@@ -78,12 +78,11 @@ module Snack
       end
     end
 
-    def render(env)
-      template_path = File.join(@app.root, env["PATH_INFO"])
+    def render(template_path)
+      return File.read template_path if File.file? template_path
 
       # default to index if path to directory
       template_path = File.join(template_path, 'index') if File.directory? template_path
-      return File.read template_path if File.exists? template_path
 
       # return the first filename that matches file
       template = Dir[File.join(template_path + '*')].first
@@ -95,12 +94,11 @@ module Snack
   # Ideally we can take any file and an app and create a view from it
   # render will return a string
   class View
-    attr_accessor :app, :template, :layout, :content_for
+    attr_accessor :app, :template, :layout
 
     def initialize(app, template)
       @app = app
       @template = template
-      @content_for = {}
       @layout = @app.layout
     end
 
@@ -122,23 +120,15 @@ module Snack
       end
     end
 
-    def content_for(name, &block)
-      @content_for[name] = []
-      @content_for[name] << capture_haml(&block) if block_is_haml?(block)
+    def capture(&block)
+      capture_haml(&block) if block_is_haml?(block)
     end
 
     # return a view body or nil if adequate template cannot be found
     def render
       template_body = Tilt.new(@template).render(self)
-
       if layout
-        @body = Tilt.new(layout).render(self) do |*name|
-          if name.first
-            (@content_for[name.first] || []).join("\n")
-          else
-            template_body
-          end
-        end
+        @body = Tilt.new(layout).render(self) { template_body }
       elsif @layout && @layout != @app.layout # user changed; alert them to fails
         raise "-: Snack :- Unable to locate layout at: '#{@layout}'"
       end

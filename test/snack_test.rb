@@ -73,9 +73,9 @@ describe Snack::Server do
     last_response.body.must_equal "happy\nsad\nmad\n"
   end
 
-  # yield / content_for
-  it "should yield named block content if defined using content_for" do
-    get('/pages/yield-normal.html')
+  # capture
+  it "should capture block content for later use" do
+    get('/pages/capture-normal.html')
     last_response.body.must_equal "<div id='footer'>\n  <p>\n    Built with -: Snack :-\n  </p>\n</div>\n"
   end
 
