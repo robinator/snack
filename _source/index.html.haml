@@ -19,7 +19,7 @@
 	%li 
 		At the command prompt, create a new snack application:
 		%pre snack new myapp # 'myapp' is the application name
-		
+
 	%li 
 		Start the web server:
 		%pre snack serve myapp
@@ -27,7 +27,7 @@
 	%li
 		Go to http://localhost:9393/ and you'll see:
 		%pre "Hello from snack!"
-		
+
 	%li 
 		When you're ready to export the site into html, use:
 		%pre snack build myapp
@@ -40,15 +40,22 @@
 %pre @layout = 'path/to/layouts/application'
 
 %h3 Partials
+%p You can use partials to break complex views up into manageable chunks. To render a partial, use the partial function. It takes a path relative to the snack root. For example, in index.html.haml:
+%pre = partial 'path/to/partials/my_partial', :album => 'Pinkerton', :band => 'Weezer'
+
+As you can see, you may also pass optional local variables to render within the partial. Snack assumes that the filenames of your partials begin with an underscore.  For the example above, snack would actually look for a partial named '_my_partial.html.haml'.
 
 %h3 Capture
 %p The capture helper allows you to extract part of a template into a variable. You can then use this variable anywhere in your templates or layout. For example, in index.html.haml:
 %pre
-	:plain
-		- @header = capture do
-		%link{:rel=>'stylesheet', :href=>'style.css'}
+	= preserve do
+		:plain
+			- @header = capture do
+			  %link{:rel=>"stylesheet", :href=>"style.css"}
+
 And then in your layout:
 %pre
-	\%body
-	\= @header
-
+	= preserve do
+		:plain
+			%head
+			  = @header
