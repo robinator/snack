@@ -6,7 +6,7 @@ module Snack
 
     def initialize(options = {})
       @settings = OpenStruct.new(options)
-      @settings.output_dir ||= '../_output'
+      @settings.output_dir ||= '../'
 
       app = self
       @builder = Rack::Builder.new do
@@ -36,9 +36,6 @@ module Snack
       FileUtils.cd root do
         # collect all files that don't start with '_'
         files = Dir[File.join('**', '*')].reject{ |f| f.include?('/_') || f.start_with?('_') }
-
-        # setup output directory
-        FileUtils.mkdir output_dir unless File.exists? output_dir
 
         files.each do |file|
           new_path = File.join(output_dir, file)

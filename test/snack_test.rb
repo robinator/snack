@@ -1,3 +1,4 @@
+# TODO: test build and new commands?
 require 'rubygems'
 require 'minitest/spec'
 require 'rack/test'
