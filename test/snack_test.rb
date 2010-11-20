@@ -69,10 +69,4 @@ describe Snack::Server do
     last_response.body.must_equal "happy\nsad\nmad\n"
   end
 
-  # capture
-  it "should capture block content for later use" do
-    get('/pages/capture-normal.html')
-    last_response.body.must_equal "<div id='footer'>\n  <p>\n    Built with -: Snack :-\n  </p>\n</div>\n"
-  end
-
 end

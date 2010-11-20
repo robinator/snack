@@ -82,8 +82,7 @@ module Snack
 
   end
 
-  # Ideally we can take any file and create a view from it
-  # render will return a string
+  # Basically take a template and render a string from it
   class View
     def initialize(template)
       @template = template
@@ -105,10 +104,6 @@ module Snack
       else
         raise "-: Snack :- Unable to locate partial at: '#{filepath}'"
       end
-    end
-
-    def capture(&block)
-      capture_haml(&block) if block_is_haml?(block)
     end
 
     # return a view body or nil if adequate template cannot be found
