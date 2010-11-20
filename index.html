@@ -8,7 +8,7 @@
   <body>
     <h1>snack</h1>
     <ul>
-      <li>Snack is a small (less than 150 lines) framework for building static websites.</li>
+      <li>Snack is a small (less than 125 lines) framework for building static websites.</li>
       <li>It compiles haml, sass, and coffee-script templates into html, css, and javascript.</li>
       <li>It also comes with a rack-based server for development.</li>
     </ul>
@@ -20,11 +20,11 @@
       </li>
       <li>
         At the command prompt, create a new snack application:
-        <pre>snack new myapp # 'myapp' is the application name</pre>
+        <pre>mkdir myapp && cd myapp && snack new # 'myapp' is the application name</pre>
       </li>
       <li>
         Start the web server:
-        <pre>snack serve myapp</pre>
+        <pre>snack serve</pre>
       </li>
       <li>
         Go to http://localhost:9393/ and you'll see:
@@ -32,8 +32,8 @@
       </li>
       <li>
         When you're ready to export the site into html, use:
-        <pre>snack build myapp</pre>
-        You should see a new directory, _output, with your site in it.
+        <pre>snack build</pre>
+        You should see the compiled files in the current directory.
       </li>
     </ol>
     <h2>Views</h2>
@@ -44,13 +44,7 @@
     <p>You can use partials to break complex views up into manageable chunks. To render a partial, use the partial function. It takes a path relative to the snack root. For example, in index.html.haml:</p>
     <pre>= partial 'path/to/partials/my_partial', :album => 'Pinkerton', :band => 'Weezer'</pre>
     As you can see, you may also pass optional local variables to render within the partial. Snack assumes that the filenames of your partials begin with an underscore.  For the example above, snack would actually look for a partial named '_my_partial.html.haml'.
-    <h3>Capture</h3>
-    <p>The capture helper allows you to extract part of a template into a variable. You can then use this variable anywhere in your templates or layout. For example, in index.html.haml:</p>
-    <pre>- @header = capture do&#x000A;  %link{:rel=>"stylesheet", :href=>"style.css"}</pre>
-    And then in your layout:
-    <pre>%head&#x000A;  = @header</pre>
     <footer>
-      <a class='env'>ENV</a>
       <a href='http://validator.w3.org/check/referer'>HTML5</a>
       <a href='http://jigsaw.w3.org/css-validator/check/referer'>CSS</a>
     </footer>
