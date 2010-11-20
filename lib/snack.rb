@@ -43,7 +43,7 @@ module Snack
           if File.directory?(file)
             FileUtils.mkdir(new_path) unless File.exists?(new_path)
           elsif Tilt.registered?(File.extname(file).gsub('.', ''))
-            body = View.new(self, file).render
+            body = View.new(file).render
             new_path = new_path.gsub(File.extname(new_path), '') # trim template extension
             File.open(new_path, 'w') { |f| f.write(body) }
           else
@@ -56,19 +56,14 @@ module Snack
   end
 
   class Server
-    attr_accessor :app
-
     def initialize(app)
       @app = app
     end
 
     def call(env)
-      body = render File.join(@app.root, env["PATH_INFO"])
+      body = render File.join(@app.root, env['PATH_INFO'])
       if body
-        @response = Rack::Response.new
-        @response['Content-Type'] = Rack::Mime.mime_type(File.extname(env["PATH_INFO"]), 'text/html')
-        @response.write body
-        @response.finish
+        [200, {"Content-Type" => Rack::Mime.mime_type(File.extname(env['PATH_INFO']), 'text/html')}, [body]]
       else
         [404, {"Content-Type" => "text/plain"}, "Not Found"]
       end
@@ -82,18 +77,15 @@ module Snack
 
       # return the first filename that matches file
       template = Dir[File.join(template_path + '*')].first
-      return View.new(@app, template).render if template
+      return View.new(template).render if template
     end
 
   end
 
-  # Ideally we can take any file and an app and create a view from it
+  # Ideally we can take any file and create a view from it
   # render will return a string
   class View
-    attr_accessor :app, :template
-
-    def initialize(app, template)
-      @app = app
+    def initialize(template)
       @template = template
     end
 
