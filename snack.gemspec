@@ -16,10 +16,9 @@ Gem::Specification.new do |s|
   s.executables        = %w[ snack ]
   s.default_executable = 'snack'
 
-  s.add_development_dependency 'rack'
-  s.add_development_dependency 'ostruct'
-  s.add_development_dependency 'tilt'
-  s.add_development_dependency 'minitest'
+  s.add_dependency 'rack'
+  s.add_dependency 'tilt'
+  s.add_dependency 'coffee-script'
   s.add_development_dependency 'haml', '>= 2.2.11'
-  s.add_development_dependency 'coffee-script'
+  s.add_development_dependency 'minitest'
 end
