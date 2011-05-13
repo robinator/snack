@@ -9,12 +9,11 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = '>= 1.3.6'
 
   s.author   = 'Rob Law'
-  s.email    = 'rob@varietyour.com'
+  s.email    = 'rob@flywheelnetworks.com'
   s.homepage = 'http://github.com/robinator/snack/'
 
   s.files              = Dir['{bin,lib,test}/**/*']
   s.executables        = %w[ snack ]
-  s.default_executable = 'snack'
 
   s.add_dependency 'rack'
   s.add_dependency 'tilt'
