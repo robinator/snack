@@ -20,4 +20,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'coffee-script'
   s.add_development_dependency 'haml', '>= 2.2.11'
   s.add_development_dependency 'minitest'
+  s.add_development_dependency 'turn'
 end

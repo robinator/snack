@@ -1,2 +1,1 @@
-$(document).ready () ->
-	alert('hello from snack')
+$(document).ready () -> alert('hello from snack')

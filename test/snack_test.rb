@@ -2,6 +2,7 @@
 require 'rubygems'
 require 'minitest/spec'
 require 'rack/test'
+require 'turn'
 require File.expand_path('../../lib/snack', __FILE__)
 
 MiniTest::Unit.autorun
@@ -18,19 +19,19 @@ describe Snack::Server do
     last_response.status.must_equal 404
   end
 
-  it "should serve file directly first if a file matches the request" do
+  it "should serve static file directly first" do
     get('/public/style.css')
     last_response.body.must_equal "body {\n\tbackground: blue;\n}"
   end
 
-  it "should serve sass files compiled through tilt if request path exists with sass extension" do
+  it "should compile and serve sass files" do
     get('/public/sass_style.css')
     last_response.body.must_equal "body {\n  background: blue; }\n"
   end
 
   it "should serve coffeescript files compiled through tilt if request path exists with coffee extension" do
     get('/public/application.js')
-    last_response.body.must_equal "(function() {\n  $(document).ready(function() {\n    return alert('hello from snack');\n  });\n})();\n"
+    last_response.body.must_equal "(function() {\n  $(document).ready(function() {\n    return alert('hello from snack');\n  });\n}).call(this);\n"
   end
 
   it "should default to index.html if directory is requested" do
