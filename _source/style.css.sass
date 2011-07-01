@@ -1,35 +1,54 @@
 body
-	font-family: helvetica
+  font-family: helvetica
+  margin: 0px
+  background-color: #fffcee
+
+h1, h2, h3
+  font-family: 'Kameron'
+  
 h1
-	margin: 0
-
+  margin: 0
+  font-size: 2.5em
+  
 a
-	cursor: pointer
-	&:link, &:visited
-		text-decoration: none
-	&:hover
-		text-decoration: underline
-
-img
-	display: block
-	margin: 20px auto 40px auto
-
-footer
-	font-size: 13px
-	padding: 20px 0px
-	display: block
-	a
-		font-family: Helvetica
-		font-size: 0.8em
-		padding-right: 0.8em
-
-.italic
-	font-style: italic
-.bold
-	font-weight: bold
+  &:link, &:visited
+    text-decoration: none
+  &:hover
+    text-decoration: underline
 
 pre
-	font-size: 12px
-	padding: 10px
-	border: 1px dashed #808080
-	background-color: #efe
+  font-size: 1em
+  padding: 10px
+  border: 1px dashed #808080
+  background-color: #efe
+
+#heading
+  position: fixed
+  top: 0
+  left: 0
+  color: #4E352E
+  width: 150px
+  padding: 10px 25px
+  
+  ul
+    list-style: square inside
+    font-size: 0.8em
+    margin: 0
+    padding: 3px 0 3px 2px
+    li
+      padding: 5px 0
+
+#content
+  margin-left: 200px
+  padding-right: 20px
+  color: #2f1d37
+
+#footer
+  position: fixed
+  bottom: 10px
+  left: 25px
+  
+  a
+    font-family: Helvetica
+    font-size: 0.5em
+    padding-right: 0.8em
