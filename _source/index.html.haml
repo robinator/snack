@@ -23,9 +23,8 @@
   %pre
     :preserve
       % gem install snack
-      % mkdir myapp && cd myapp  # 'myapp' is the application name
-      % snack new                # initialize snack
-      % snack serve              # start the server for development
+      % snack new myapp       # initialize snack
+      % snack serve myapp     # start the server for development (can also do 'snack serve' within app directory)
 
   When you're ready to compile the site into html, css, and js:
   %pre % snack build
