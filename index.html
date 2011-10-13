@@ -5,6 +5,9 @@
     <title>Snack - a micro-framework for static websites</title>
     <link href='http://fonts.googleapis.com/css?family=Kameron:700subset=latin&amp;v2' rel='stylesheet' type='text/css' />
     <link href='style.css' rel='stylesheet' type='text/css' />
+    <script type='text/javascript'>
+      var mpq=[];mpq.push(["init","a4dbd0fbbd4f4f6fa1a71120ba6e6092"]);(function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+"//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push([f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links","track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<d.length;c++){mpq[d[c]]=e(d[c])}})();
+    </script>
   </head>
   <body>
     <div id='heading'>
@@ -27,7 +30,7 @@
       <h2>Getting Started</h2>
       <pre>% gem install snack&#x000A;% snack new myapp       # initialize snack&#x000A;% snack serve myapp     # start the server for development (can also do 'snack serve' within app directory)&#x000A;</pre>
       When you're ready to compile the site into html, css, and js:
-      <pre>% snack build</pre>
+      <pre>% snack build myapp</pre>
       You should see the compiled files in the current directory.
       <h3>Layouts</h3>
       <p>By default, snack does not render templates within layouts. If you would like your templates to render within a layout, assign the layout's path to @layout. The path should be relative to the snack root.</p>
