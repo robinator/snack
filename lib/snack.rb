@@ -92,10 +92,9 @@ module Snack
     end
 
     def partial(path, locals = {})
-      pieces = path.to_s.split('/')
-      name = '_' + pieces.pop
-      filepath = File.join(File.dirname(@template), pieces, name)
-      template = Dir[filepath + '*'].first
+      # insert a '_' before the filename before we search
+      filepath = File.join(File.dirname(@template), path.to_s)
+      template = Dir[filepath.reverse.sub('/', '_/').reverse + '*'].first
 
       if template
         Tilt.new(template).render(self, locals)
