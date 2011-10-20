@@ -76,7 +76,6 @@ module Snack
       template = Dir[File.join(template_path + '*')].first
       return View.new(template).render if template
     end
-
   end
 
   # Take a template and render a string from it.
