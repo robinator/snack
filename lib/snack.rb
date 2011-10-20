@@ -26,8 +26,7 @@ module Snack
     end
 
     def new
-      FileUtils.mkdir root unless File.exists? root
-      FileUtils.cd root { File.open('index.html.haml', 'w') { |f| f.puts 'Hello from snack!' } }
+      File.open(File.join(FileUtils.mkpath(root), 'index.html.haml'), 'w') { |f| f.puts 'Hello from snack!' }
     end
 
     def build
