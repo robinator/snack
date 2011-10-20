@@ -1,4 +1,4 @@
-%w[ rubygems ostruct rack tilt ].each{ |s| require s }
+%w[ rubygems ostruct rack tilt ].each { |s| require s }
 
 module Snack
   class Application
@@ -27,15 +27,13 @@ module Snack
 
     def new
       FileUtils.mkdir root unless File.exists? root
-      FileUtils.cd root do
-        File.open('index.html.haml', 'w') { |f| f.puts 'Hello from snack!' }
-      end
+      FileUtils.cd root { File.open('index.html.haml', 'w') { |f| f.puts 'Hello from snack!' } }
     end
 
     def build
       FileUtils.cd root do
         # collect all files that don't start with '_'
-        files = Dir[File.join('**', '*')].reject{ |f| f.include?('/_') || f.start_with?('_') }
+        files = Dir[File.join('**', '*')].reject { |f| f.include?('/_') || f.start_with?('_') }
 
         files.each do |file|
           new_path = File.join(output_dir, file)
@@ -63,9 +61,9 @@ module Snack
     def call(env)
       body = render File.join(@app.root, env['PATH_INFO'])
       if body
-        [200, {"Content-Type" => Rack::Mime.mime_type(File.extname(env['PATH_INFO']), 'text/html')}, [body]]
+        [200, { "Content-Type" => Rack::Mime.mime_type(File.extname(env['PATH_INFO']), 'text/html') }, [body]]
       else
-        [404, {"Content-Type" => "text/plain"}, "Not Found"]
+        [404, { "Content-Type" => "text/plain" }, "Not Found"]
       end
     end
 
@@ -82,7 +80,7 @@ module Snack
 
   end
 
-  # Basically take a template and render a string from it
+  # Take a template and render a string from it.
   class View
     def initialize(template)
       @template = template
