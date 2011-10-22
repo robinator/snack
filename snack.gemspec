@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = '>= 1.3.6'
 
   s.author   = 'Rob Law'
-  s.email    = 'rob@flywheelnetworks.com'
+  s.email    = 'rob@robmadethis.com'
   s.homepage = 'http://github.com/robinator/snack/'
 
   s.files              = Dir['{bin,lib,test}/**/*']
