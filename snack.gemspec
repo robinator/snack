@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'snack'
-  s.version     = '0.2'
-  s.date        = '2010-10-17'
+  s.version     = '0.2.1'
+  s.date        = '2012-04-20'
   s.summary     = 'A static website framework.'
   s.description = 'Snack is a small framework for building static websites.'
 
