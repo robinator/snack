@@ -1,15 +1,21 @@
 #!/usr/bin/env ruby
 require File.expand_path('../../lib/snack', __FILE__)
 
-command = ARGV[0] || 'serve'
-directory = ARGV[1] || '_source'
+cmd = ARGV[0] || 'serve'
+dir = ARGV[1] || '_source'
+puts "-: Snack :- App root is: '#{dir}'"
 
-if %w[ build serve new ].include?(command)
-  abort "-: Snack :- Unable to locate: '#{directory}'" unless command == 'new' || File.exists?(directory)
-  puts "-: Snack :- App root is: '#{directory}'"
-  @app = Snack::Application.new(:root => directory)
-  @app.send(command)
+case cmd
+when 'new'
+  require 'fileutils'
+  File.open(File.join(FileUtils.mkpath(dir), 'index.html'), 'w') do |f|
+    f.puts 'Hello from snack!'
+  end
+when 'build', 'serve'
+  abort "-: Snack :- Unable to locate: '#{dir}'" unless Dir.exists?(dir)
+  @app = Snack::Application.new(:root => dir)
+  @app.send cmd
 else
-  puts "'#{command}' is not a valid snack command"
-  puts "Usage: snack {build,serve,new} <directory>"
+  puts "'#{cmd}' is not a valid snack command"
+  puts 'Usage: snack (build,serve,new) <directory>'
 end

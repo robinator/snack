@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'snack'
-  s.version     = '0.1'
+  s.version     = '0.2'
   s.date        = '2010-10-17'
   s.summary     = 'A static website framework.'
   s.description = 'Snack is a small framework for building static websites.'
@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
 
   s.author   = 'Rob Law'
   s.email    = 'rob@robmadethis.com'
-  s.homepage = 'http://github.com/robinator/snack/'
+  s.homepage = 'http://robmadethis.com/snack'
 
   s.files              = Dir['{bin,lib,test}/**/*']
   s.executables        = %w[ snack ]
@@ -20,5 +20,4 @@ Gem::Specification.new do |s|
   s.add_dependency 'coffee-script'
   s.add_development_dependency 'haml', '>= 2.2.11'
   s.add_development_dependency 'minitest'
-  s.add_development_dependency 'turn'
 end

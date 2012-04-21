@@ -1,8 +1,7 @@
+# use 'turn test/snack_test.rb' for pretty output
 # TODO: test build and new commands?
-require 'rubygems'
 require 'minitest/spec'
 require 'rack/test'
-require 'turn'
 require File.expand_path('../../lib/snack', __FILE__)
 
 MiniTest::Unit.autorun
@@ -14,27 +13,27 @@ describe Snack::Server do
     @app = Snack::Application.new(:root => "#{File.dirname(__FILE__)}/test_app").builder
   end
 
-  it "should respond with 404 on bad requests" do
+  it 'should respond with 404 on bad requests' do
     get('/foo')
     last_response.status.must_equal 404
   end
 
-  it "should serve static file directly first" do
+  it 'should serve static file directly first' do
     get('/public/style.css')
     last_response.body.must_equal "body {\n\tbackground: blue;\n}"
   end
 
-  it "should compile and serve sass files" do
+  it 'should compile and serve sass files' do
     get('/public/sass_style.css')
     last_response.body.must_equal "body {\n  background: blue; }\n"
   end
 
-  it "should serve coffeescript files compiled through tilt if request path exists with coffee extension" do
+  it 'should serve coffeescript files compiled through tilt if request path exists with coffee extension' do
     get('/public/application.js')
-    last_response.body.must_equal "(function() {\n  $(document).ready(function() {\n    return alert('hello from snack');\n  });\n}).call(this);\n"
+    last_response.body.must_equal "(function() {\n\n  $(document).ready(function() {\n    return alert('hello from snack');\n  });\n\n}).call(this);\n"
   end
 
-  it "should default to index.html if directory is requested" do
+  it 'should default to index.html if directory is requested' do
     direct = get('/index.html')
     response = get('/')
 
@@ -43,29 +42,29 @@ describe Snack::Server do
   end
 
   # partials
-  it "should render partials if found" do
+  it 'should render partials if found' do
     get('/pages/partial-normal.html')
     last_response.body.must_equal "This is a partial!\n"
   end
 
-  it "should error if partial not found" do
+  it 'should error if partial not found' do
     get('/pages/partial-failing.html')
     last_response.status.must_equal 500
   end
 
   # layouts
-  it "should render a page within a layout if layout exists" do
+  it 'should render a page within a layout if layout exists' do
     get('/pages/layout-normal.html')
     last_response.body.must_equal "<div id='content'>\n  <h1>Page Content</h1>\n</div>\n"
   end
 
-  it "should error if user set layout and layout not found" do
+  it 'should error if user set layout and layout not found' do
     get('/pages/layout-failing.html')
     last_response.status.must_equal 500
   end
 
   # variables
-  it "should pass variables defined in the page to the layout" do
+  it 'should pass variables defined in the page to the layout' do
     get('/pages/variable-normal.html')
     last_response.body.must_equal "happy\nsad\nmad\n"
   end
