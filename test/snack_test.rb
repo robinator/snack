@@ -1,8 +1,8 @@
 # use 'turn test/snack_test.rb' for pretty output
 # TODO: test build and new commands?
-require 'minitest/spec'
-require 'rack/test'
 require File.expand_path('../../lib/snack', __FILE__)
+require 'minitest/autorun'
+require 'rack/test'
 
 MiniTest::Unit.autorun
 
@@ -30,7 +30,7 @@ describe Snack::Server do
 
   it 'should serve coffeescript files compiled through tilt if request path exists with coffee extension' do
     get('/public/application.js')
-    last_response.body.must_equal "(function() {\n\n  $(document).ready(function() {\n    return alert('hello from snack');\n  });\n\n}).call(this);\n"
+    last_response.body.must_equal "(function() {\n  $(document).ready(function() {\n    return alert('hello from snack');\n  });\n\n}).call(this);\n"
   end
 
   it 'should default to index.html if directory is requested' do
