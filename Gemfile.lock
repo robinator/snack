@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    snack (0.2.2)
+    snack (0.2.3)
       coffee-script
       rack
       tilt

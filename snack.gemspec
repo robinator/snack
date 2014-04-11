@@ -16,13 +16,13 @@ Gem::Specification.new do |s|
   s.files              = Dir['{bin,lib,test}/**/*']
   s.executables        = %w[ snack ]
 
-  s.add_dependency 'rack'
-  s.add_dependency 'tilt'
-  s.add_dependency 'coffee-script'
-  s.add_development_dependency 'haml', '>= 2.2.11'
-  s.add_development_dependency 'sass'
+  s.add_dependency 'rack', '~> 0'
+  s.add_dependency 'tilt', '~> 0'
+  s.add_dependency 'coffee-script', '~> 0'
+  s.add_development_dependency 'haml', '~> 2.2', '>= 2.2.11'
+  s.add_development_dependency 'sass', '~> 0'
   s.add_development_dependency 'minitest', '~> 5'
-  s.add_development_dependency 'rack-test'
-  s.add_development_dependency 'coveralls'
-  s.add_development_dependency 'rake'
+  s.add_development_dependency 'rack-test', '~> 0'
+  s.add_development_dependency 'coveralls', '~> 0'
+  s.add_development_dependency 'rake', '~> 0'
 end
