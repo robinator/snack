@@ -4,4 +4,4 @@ Rake::TestTask.new(:test) do |test|
   test.pattern = 'test/snack_test.rb'
 end
 
-task :default => :test
+task default: :test

@@ -13,7 +13,7 @@ describe Snack::Server do
   include Rack::Test::Methods
 
   def app
-    @app = Snack::Application.new(:root => "#{File.dirname(__FILE__)}/test_app").builder
+    @app = Snack::Application.new(root: "#{File.dirname(__FILE__)}/test_app").builder
   end
 
   it 'should respond with 404 on bad requests' do

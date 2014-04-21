@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'snack'
-  s.version     = '0.2.5'
+  s.version     = '0.2.6'
   s.date        = '2013-09-13'
   s.summary     = 'A static website framework.'
   s.description = 'Snack is a small framework for building static websites.'
@@ -18,9 +18,9 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rack', '~> 1.5'
   s.add_dependency 'tilt', '~> 2'
+  s.add_dependency 'sass', '= 3.2.10'
   s.add_dependency 'coffee-script', '~> 2.2'
   s.add_development_dependency 'haml', '~> 4'
-  s.add_development_dependency 'sass', '~> 3'
   s.add_development_dependency 'minitest', '~> 5'
   s.add_development_dependency 'rack-test', '~> 0'
   s.add_development_dependency 'coveralls', '~> 0'

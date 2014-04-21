@@ -5,9 +5,7 @@ module Snack
     attr_accessor :settings, :builder
 
     def initialize(options = {})
-      @settings = options
-      @settings[:output_dir] ||= '../'
-
+      @settings = { output_dir: '../' }.merge options
       app = self
       @builder = Rack::Builder.new do
         use Rack::CommonLogger
