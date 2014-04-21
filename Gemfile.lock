@@ -1,10 +1,10 @@
 PATH
   remote: .
   specs:
-    snack (0.2.3)
-      coffee-script
-      rack
-      tilt
+    snack (0.2.4)
+      coffee-script (~> 2.2)
+      rack (~> 1.5)
+      tilt (~> 2)
 
 GEM
   remote: https://rubygems.org/
@@ -46,10 +46,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  coveralls
-  haml (>= 2.2.11)
+  coveralls (~> 0)
+  haml (~> 4)
   minitest (~> 5)
-  rack-test
-  rake
-  sass
+  rack-test (~> 0)
+  rake (~> 10)
+  sass (~> 3)
   snack!

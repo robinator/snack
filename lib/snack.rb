@@ -1,4 +1,4 @@
-%w[ rack tilt ].each { |s| require s }
+%w[ rack tilt tilt/sass ].each { |s| require s }
 
 module Snack
   class Application
@@ -18,7 +18,7 @@ module Snack
     end
 
     def serve
-      Rack::Handler::Thin.run @builder, :Port => 9393
+      Rack::Handler::Thin.run @builder, Port: 9393
     end
 
     def build
