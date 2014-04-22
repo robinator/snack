@@ -38,7 +38,7 @@ describe Snack::Server do
 
   it 'should default to index.html if directory is requested' do
     direct = get '/index.html'
-    response = get '/'
+    get '/'
 
     last_response.status.must_equal direct.status
     last_response.body.must_equal direct.body
