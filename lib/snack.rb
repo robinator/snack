@@ -1,4 +1,4 @@
-%w[ rack tilt tilt/sass ].each { |s| require s }
+%w[ rack rackup tilt ].each { |s| require s }
 
 module Snack
   class Application
@@ -16,7 +16,7 @@ module Snack
     end
 
     def serve
-      Rack::Handler::Thin.run @builder, Port: 9393
+      Rackup::Server.start app: @builder, Port: 9393
     end
 
     def build
@@ -30,7 +30,7 @@ module Snack
           if Tilt[path]
             body = View.new(file).render
             File.open(path.chomp(File.extname(path)), 'w') { |f| f.write body }
-          elsif Dir.exists? file
+          elsif Dir.exist? file
             FileUtils.mkpath path
           else
             FileUtils.cp file, path
@@ -58,7 +58,7 @@ module Snack
       return File.read path if File.file? path
 
       # default to index if path to directory
-      path = File.join(path, 'index') if Dir.exists? path
+      path = File.join(path, 'index') if Dir.exist? path
 
       # return the first filename that matches file
       template = Dir[File.join("#{path}*")].first
@@ -85,11 +85,11 @@ module Snack
 
     # return a view body or nil if adequate template cannot be found
     def render
-      template_body = Tilt.new(@template).render(self)
+      template_body = Tilt.new(@template, pretty: true).render(self)
       if @layout
         layout = Dir[File.join(File.dirname(@template), @layout) + '*'].first
         raise "-: Snack :- Unable to locate layout at: '#@layout'" unless layout
-        @body = Tilt.new(layout).render(self) { template_body }
+        @body = Tilt.new(layout, disable_escape: true, pretty: true).render(self) { template_body }
       end
       @body || template_body
     end
