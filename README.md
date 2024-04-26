@@ -10,8 +10,8 @@
 [![Build Status](https://travis-ci.org/robinator/snack.png?branch=master)](https://travis-ci.org/robinator/snack)
 [![Coverage Status](https://coveralls.io/repos/robinator/snack/badge.png)](https://coveralls.io/r/robinator/snack)
 
- - Snack is a small (< 100 lines) framework for building static websites.
- - It compiles haml, sass, and coffee-script templates into html, css, and javascript.
+ - Snack is a tiny (< 100 lines) framework for building static websites.
+ - It compiles any Tilt supported template like slim, sass, and coffee-script into html, css, and javascript.
  - It also comes with a rack-based server for development.
 
-© Rob Law 2010-13. Released under the MIT license.
+© Rob Law 2010-24. Released under the MIT license.

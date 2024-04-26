@@ -1,0 +1,35 @@
+- @layout = nil
+h1 Snack Tests
+
+h2 Snack::Server
+h3 Basic
+ul
+  li
+    a href='/foo' should respond with 404 on bad requests
+  li
+    a href='/public/style.css' should serve static file directly first
+  li
+    a href='/public/sass_style.css' should compile and serve sass files
+  li
+    a href='/public/application.js' should serve coffeescript files compiled through tilt if request path exists with coffee extension
+  li
+    a href='/' should default to index.html if directory is requested
+
+h3 Partials
+ul
+  li
+    a href='/pages/partial-normal.html' should render partials if found
+  li
+    a href='/pages/partial-failing.html' should error if partial not found
+
+h3 Layouts
+ul
+  li
+    a href='/pages/layout-normal.html' should render a page within a layout if layout exists
+  li
+    a href='/pages/layout-failing.html' should error if user set layout and layout not found
+
+h3 Variables
+ul
+  li
+    a href='/pages/variable-normal.html' should pass variables defined in the page to the layout
