@@ -12,7 +12,7 @@ when 'new'
     f.puts 'Hello from snack!'
   end
 when 'build', 'serve'
-  abort "-: Snack :- Unable to locate: '#{dir}'" unless Dir.exists?(dir)
+  abort "-: Snack :- Unable to locate: '#{dir}'" unless Dir.exist?(dir)
   @app = Snack::Application.new(root: dir)
   @app.send cmd
 else
